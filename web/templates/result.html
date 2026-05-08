@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alignment Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container results-container">
+        <h1>Alignment Result</h1>
+        <h3 class="algo-title">{{ algo_name }}</h3>
+
+        <div class="summary-card">
+            <div class="score-display">
+                <span class="label">Alignment Score:</span>
+                <span class="value">{{ score }}</span>
+            </div>
+            
+            <div class="aligned-sequences">
+                <div class="seq-row"><span>Seq 1:</span> <pre>{{ align1 }}</pre></div>
+                <div class="seq-row"><span>Seq 2:</span> <pre>{{ align2 }}</pre></div>
+            </div>
+        </div>
+
+        <h2>Dynamic Programming Matrix</h2>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>-</th>
+                        {% for char in seq2 %}
+                            <th>{{ char }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in range(matrix|length) %}
+                        <tr>
+                            <th>{% if i == 0 %}-{% else %}{{ seq1[i-1] }}{% endif %}</th>
+                            {% for j in range(matrix[i]|length) %}
+                                {% set cell = matrix[i][j] %}
+                                <td class="{% if cell.is_path %}path-cell{% endif %}">
+                                    {{ cell.score }}
+                                    {% if cell.

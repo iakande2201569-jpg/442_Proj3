@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sequence Alignment Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Sequence Alignment Engine</h1>
+        <p class="subtitle">Dynamic Programming Implementations</p>
+
+        <form action="/align" method="POST" class="align-form">
+            <div class="form-group">
+                <label for="seq1">Sequence 1:</label>
+                <input type="text" id="seq1" name="seq1" placeholder="e.g., GCAATCG" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="seq2">Sequence 2:</label>
+                <input type="text" id="seq2" name="seq2" placeholder="e.g., GATCG" required>
+            </div>
+
+            <div class="scoring-params">
+                <div class="form-group">
+                    <label for="match">Match Score:</label>
+                    <input type="number" id="match" name="match" value="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="mismatch">Mismatch Penalty:</label>
+                    <input type="number" id="mismatch" name="mismatch" value="-1" required>
+                </div>
+                <div class="form-group">
+                    <label for="gap">Gap Penalty:</label>
+                    <input type="number" id="gap" name="gap" value="-2" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="algorithm">Algorithm Selection:</label>
+                <select id="algorithm" name="algorithm" required>
+                    <option value="global">Global Alignment (Needleman-Wunsch)</option>
+                    <option value="local">Local Alignment (Smith-Waterman)</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn-submit">Compute Alignment</button>
+        </form>
+    </div>
+</body>
+</html>
